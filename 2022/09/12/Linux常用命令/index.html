@@ -16,7 +16,7 @@
 <meta property="og:description" content="一、开关机命令1231.shutdown -h now: 立即关机2.reboot: 重启3.logout: 注销  二、 快捷命令123451.tab: 补全命令2.ctrl + l: 清空屏幕，类似clear3.ctrl + r: 查找历史命令，类似history4.ctrl + k: 删除此处至末尾所有内容5.ctrl + u: 删除此处至开始所有内容  三、日常操作命令 ls  12345">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-10-18T09:17:31.102Z">
+<meta property="article:modified_time" content="2023-10-19T13:37:27.996Z">
 <meta property="article:author" content="br1ghtLi">
 <meta name="twitter:card" content="summary">
   
@@ -181,7 +181,7 @@
 <h2 id="三、日常操作命令"><a href="#三、日常操作命令" class="headerlink" title="三、日常操作命令"></a>三、日常操作命令</h2><blockquote>
 <p>ls</p>
 </blockquote>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ls命令是列出目录内容的意思（List Directtory Contents）。运行它就是列出文件夹的内容，可能是文件也可能是文件夹。</span><br><span class="line"></span><br><span class="line">ls -l(ll): 以详情模式(long listing fashion)列出文件夹的内容。</span><br><span class="line"></span><br><span class="line">ls -a: 列出文件夹里的所有内容，包括以&quot;.&quot;开头的隐藏文件。</span><br><span class="line"></span><br><span class="line">注意：在Linux中，文件以“.”开头就是隐藏文件，并且每个文件，文件夹，设备或者命令都是以文件对待</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ls命令是列出目录内容的意思（List Directtory Contents）。运行它就是列出文件夹的内容，可能是文件也可能是文件夹。</span><br><span class="line"></span><br><span class="line">ls -l(ll): 以详情模式(long listing fashion)列出文件夹的内容。</span><br><span class="line"></span><br><span class="line">ls -a: 列出文件夹里的所有内容，包括以&quot;.&quot;开头的隐藏文件。</span><br><span class="line"></span><br><span class="line">lsof -i:端口号: 查询端口号对应程序信息</span><br><span class="line"></span><br><span class="line">注意：在Linux中，文件以“.”开头就是隐藏文件，并且每个文件，文件夹，设备或者命令都是以文件对待</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>lsblk</p>
@@ -227,6 +227,36 @@
 <p>date</p>
 </blockquote>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">“date”命令使用标准的输出打印当前的日期和时间，也可以深入设置。</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、-系统常用操作命令"><a href="#四、-系统常用操作命令" class="headerlink" title="四、 系统常用操作命令"></a>四、 系统常用操作命令</h2><blockquote>
+<p>1、 指定运行级别</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">默认运行级别</span><br><span class="line">init 0: 关机</span><br><span class="line">init 1: 单用户</span><br><span class="line">init 2: 多用户状态没有网络服务</span><br><span class="line">init 3: 多用户状态有网络服务</span><br><span class="line">init 4: 系统未使用保留给用户</span><br><span class="line">init 5: 图形化界面</span><br><span class="line">init 6: 重启</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>2、 文件显示命令</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cat: 一次性显示整个文件的内容，还可以将多个文件连接起来显示，常与重定向符号配合使用，适合小文件读取</span><br><span class="line">more: 分页显示文件内容，只能后翻页</span><br><span class="line">less: 分页显示文件内容，不限制翻页方向</span><br><span class="line">head: 显示文件头部内容，默认显示前10行</span><br><span class="line">tail: 显示文件尾部内容，默认显示后10行</span><br><span class="line">tail -f: 监视文件的尾部内容</span><br><span class="line">grep: 查询内容，常配合管道符进行内容检索 </span><br><span class="line">|: 将|左边命令的结果交给|右边的命令进行处理</span><br><span class="line">cut: 显示每行从开头算起第num1到num2的字符</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>3、 文件搜索命令</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find: 搜索文件及目录</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>4、 重定向命令</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">重定向命令: &quot;&gt;&quot;为覆盖, &quot;&gt;&gt;&quot;追加内容到文件尾部</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>5、 文件及目录增删改命令</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p: 创建多级目录</span><br><span class="line">rm -rf: 递归删除目录不需要确认</span><br><span class="line">cd: 切换到指定目录中</span><br><span class="line">touch: 创建一个空文件</span><br><span class="line">cp -r: 递归拷贝目录</span><br><span class="line">mv: 剪切目录，如果源文件与目标位置是同一目录则命名</span><br><span class="line">ln -s: 创建软连接</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>6、 其他命令</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">who: 显示登录系统的用户信息 whoami: 显示当前登录的用户</span><br><span class="line">sleep: 将当前动作延迟一段时间</span><br><span class="line">kill: 默认用于终止进程</span><br><span class="line">ps: 显示进程的名称、占用资源、状态 </span><br><span class="line">ps -ef: 查看服务器进程全部信息</span><br><span class="line">top: 显示CPU使用率、内存大小、内存使用率、进程状态等</span><br><span class="line">df -h: 查看磁盘占用的空间</span><br><span class="line">netstat -tunple | grep 端口号: 查询端口号相关进程信息 </span><br><span class="line">pwd: 查看当前路径</span><br></pre></td></tr></table></figure>
 
 
       
