@@ -154,6 +154,78 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Kafka一键启动脚本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/11/18/Kafka%E4%B8%80%E9%94%AE%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/">Kafka一键启动脚本</a>
+    </h1>
+  
+
+        
+        <a href="/2022/11/18/Kafka%E4%B8%80%E9%94%AE%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/" class="archive-article-date">
+  	<time datetime="2022-11-18T11:54:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-11-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p><strong>Kafka 一键启动脚本</strong></p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">ZOOKEEPER_SERVER=&quot;/export/server/zookeeper/bin/zkServer.sh&quot;</span><br><span class="line">KAFKA_SERVER=&quot;/export/server/kafka/bin/&quot;</span><br><span class="line">KAFKA_CONFIG=&quot;/export/server/kafka/config/server.properties&quot;</span><br><span class="line">if [ $# -ne 0 ];then</span><br><span class="line">    if [ $1 == &quot;start&quot; ];then</span><br><span class="line">	echo &quot;zookeeper服务启动中......&quot;</span><br><span class="line">        for i in node1 node2 node3</span><br><span class="line">        do</span><br><span class="line">        ssh $i &quot;source /etc/profile &amp;&amp; $&#123;ZOOKEEPER_SERVER&#125; start&quot;</span><br><span class="line">        done</span><br><span class="line">	for i in &#123;5..1&#125;</span><br><span class="line">	do</span><br><span class="line">	echo &quot;倒计时: $i秒&quot;</span><br><span class="line">	sleep 1</span><br><span class="line">	done</span><br><span class="line">	echo &quot;kafka服务启动中......&quot;</span><br><span class="line">	for i in node1 node2 node3</span><br><span class="line">	do</span><br><span class="line">	ssh $i &quot;source /etc/profile &amp;&amp; $&#123;KAFKA_SERVER&#125;/kafka-server-start.sh -daemon $&#123;KAFKA_CONFIG&#125;&quot;</span><br><span class="line">	done</span><br><span class="line">    fi</span><br><span class="line">    if [ $1 == &quot;stop&quot; ];then</span><br><span class="line">	echo &quot;kafka服务关闭中......&quot;</span><br><span class="line">	for i in node1 node2 node3</span><br><span class="line">	do</span><br><span class="line">	ssh $i &quot;source /etc/profile &amp;&amp; $&#123;KAFKA_SERVER&#125;/kafka-server-stop.sh&quot;</span><br><span class="line">	done</span><br><span class="line">	for i in &#123;5..1&#125;</span><br><span class="line">	do</span><br><span class="line">	echo &quot;倒计时: $i秒&quot;</span><br><span class="line">	sleep 1</span><br><span class="line">	done</span><br><span class="line">	echo &quot;zookeeper服务关闭中......&quot;</span><br><span class="line">        for i in node1 node2 node3</span><br><span class="line">        do</span><br><span class="line">        ssh $i &quot;source /etc/profile &amp;&amp; $&#123;ZOOKEEPER_SERVER&#125; stop&quot;</span><br><span class="line">        done</span><br><span class="line">    fi</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>Zookeeper 一键启动脚本</strong></p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">ZOOKEEPER_SERVER=&quot;/export/server/zookeeper/bin/zkServer.sh&quot;</span><br><span class="line">if [ $# -ne 0 ];then</span><br><span class="line">    if [ $1 == &quot;start&quot; ];then</span><br><span class="line">        for i in node1 node2 node3</span><br><span class="line">            do</span><br><span class="line">            ssh $i &quot;source /etc/profile &amp;&amp; $&#123;ZOOKEEPER_SERVER&#125; start&quot;</span><br><span class="line">            done</span><br><span class="line">    fi</span><br><span class="line">    if [ $1 == &quot;status&quot; ];then</span><br><span class="line">        for i in node1 node2 node3</span><br><span class="line">            do</span><br><span class="line">            ssh $i &quot;source /etc/profile &amp;&amp;  $&#123;ZOOKEEPER_SERVER&#125; status&quot;</span><br><span class="line">            done</span><br><span class="line">    fi</span><br><span class="line">    if [ $1 == &quot;stop&quot; ];then</span><br><span class="line">        for i in node1 node2 node3</span><br><span class="line">            do</span><br><span class="line">            ssh $i &quot;source /etc/profile &amp;&amp; $&#123;ZOOKEEPER_SERVER&#125; stop&quot;</span><br><span class="line">            done</span><br><span class="line">    fi</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/11/18/Kafka%E4%B8%80%E9%94%AE%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Linux常用命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
